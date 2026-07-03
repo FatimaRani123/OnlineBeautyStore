@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Beauty Store</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap and icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+ <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body class="bg-light">
+
+  <!-- Top navbar -->
+  <nav class="navbar navbar-light bg-white border-bottom px-3 sticky-top">
+    <div class="d-flex align-items-center">
+      <button class="btn btn-outline-secondary d-md-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas" aria-controls="sidebarOffcanvas">
+        <i class="bi bi-list"></i>
+      </button>
+      <a class="navbar-brand d-flex align-items-center" href="/">
+       <img src="{% static 'img/logo.jpg' %}" alt="Beauty Store" width="100" height="80">
+        <span class="fs-5 fw-semibold brand-text">Beauty Store</span>
+      </a>
+    </div>
+    <ul class="nav d-none d-md-flex ms-3">
+      <li class="nav-item"><a class="nav-link" href="/catalog/brands/">Brands</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'catalog:category_products' 'skincare' %}">Skin Care</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'catalog:category_products' 'makeup' %}">Make Up</a></li>
+      <li class="nav-item"><a class="nav-link" href="{% url 'catalog:category_products' 'hair-body' %}">Hair &amp; Body</a></li>
+    </ul>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <a href="/cart/" class="btn btn-outline-primary">
+        <i class="bi bi-cart3 me-1"></i> <span class="badge bg-primary">{{ cart_item_count }}</span>
+      </a>
+      <a href="/admin/" class="btn btn-outline-secondary">Account</a>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Desktop sidebar -->
+      <aside class="col-md-3 col-lg-2 d-none d-md-block sidebar bg-white border-end">
+        <div class="p-3">
+          <div class="sidebar-user d-flex align-items-center mb-3">
+            <div class="avatar me-2"><i class="bi bi-person-circle fs-3"></i></div>
+            <div>
+              <div class="fw-semibold">Welcome</div>
+              <div class="text-muted small">Browse catalog</div>
+            </div>
+          </div>
+
+          <nav class="sidebar-nav">
+            <div class="sidebar-section">
+              <div class="sidebar-title">Browse</div>
+              <a class="sidebar-link" href="/catalog/brands/"><i class="bi bi-building me-2"></i>Brands</a>
+              <div class="sidebar-subtitle mt-3">Categories</div>
+              <a class="sidebar-link" href="{% url 'catalog:category_products' 'skincare' %}"><i class="bi bi-heart me-2"></i>Skin Care</a>
+              <a class="sidebar-link" href="{% url 'catalog:category_products' 'makeup' %}"><i class="bi bi-magic me-2"></i>Make Up</a>
+              <a class="sidebar-link" href="{% url 'catalog:category_products' 'hair-body' %}"><i class="bi bi-flower3 me-2"></i>Hair &amp; Body</a>
+
+              <div class="sidebar-subtitle mt-3">Subcategories</div>
+              {% comment %} Optional deeper filters {% endcomment %}
+              <a class="sidebar-sublink" href="{% url 'catalog:subcategory_products' 'serum' %}">Serum</a>
+              <a class="sidebar-sublink" href="{% url 'catalog:subcategory_products' 'moisturiser' %}">Moisturiser</a>
+              <a class="sidebar-sublink" href="{% url 'catalog:subcategory_products' 'cleanser' %}">Cleanser</a>
+              <!-- Add your actual subcategory slugs -->
+            </div>
+          </nav>
+
+          <div class="sidebar-footer mt-4">
+            <a class="sidebar-link" href="/orders/admin/current/"><i class="bi bi-receipt me-2"></i>Orders</a>
+            <a class="sidebar-link" href="/orders/admin/history/"><i class="bi bi-archive me-2"></i>History</a>
+            <a class="sidebar-link" href="/admin/"><i class="bi bi-gear me-2"></i>Settings</a>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Mobile offcanvas sidebar -->
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvas">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+          <a class="sidebar-link" href="/catalog/brands/"><i class="bi bi-building me-2"></i>Brands</a>
+          <div class="sidebar-subtitle mt-3">Categories</div>
+          <a class="sidebar-link" href="{% url 'catalog:category_products' 'skincare' %}"><i class="bi bi-heart me-2"></i>Skin Care</a>
+          <a class="sidebar-link" href="{% url 'catalog:category_products' 'makeup' %}"><i class="bi bi-magic me-2"></i>Make Up</a>
+          <a class="sidebar-link" href="{% url 'catalog:category_products' 'hair-body' %}"><i class="bi bi-flower3 me-2"></i>Hair &amp; Body</a>
+
+          <div class="sidebar-subtitle mt-3">Subcategories</div>
+          <a class="sidebar-sublink" href="{% url 'catalog:subcategory_products' 'serum' %}">Serum</a>
+          <a class="sidebar-sublink" href="{% url 'catalog:subcategory_products' 'moisturiser' %}">Moisturiser</a>
+          <a class="sidebar-sublink" href="{% url 'catalog:subcategory_products' 'cleanser' %}">Cleanser</a>
+        </div>
+      </div>
+
+      <!-- Main content -->
+      <main class="col-12 col-md-9 col-lg-10 p-3">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
+

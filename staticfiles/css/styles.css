@@ -1,0 +1,75 @@
+/* Cards with fixed image sizes */
+.img-fixed-brand, .img-fixed-category {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.img-fixed-product {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Sidebar links */
+.sidebar-link {
+  display: inline-block;
+  padding: 4px 0;
+  color: #333;
+}
+/*.sidebar-link:hover { color: #0d6efd; }*/
+
+/* Spacing and typography tweaks */
+.card-title { margin: 0; font-size: 0.95rem; }
+a, .nav-link, .sidebar-link {
+  color: #000 !important;
+  text-decoration: none;
+}
+
+a:hover, .nav-link:hover, .sidebar-link:hover {
+  color: #555 !important;
+}
+.text-teal{
+    color: #000;
+    font-style:italic;
+}
+/* Brand logo */
+
+.brand-text {
+  color: #0f172a; /* deep slate */
+}
+
+/* All links default to black */
+a, a:link, a:visited, .nav-link, .sidebar-link, .sidebar-sublink {
+  color: #000 !important;
+  text-decoration: none !important;
+}
+
+/* Hover state */
+a:hover, .nav-link:hover, .sidebar-link:hover, .sidebar-sublink:hover {
+  color: #555 !important;
+  text-decoration: none !important;
+}
+
+
+/* Sidebar */
+.sidebar { min-height: calc(100vh - 56px); }
+.sidebar-title { font-size: 0.8rem; letter-spacing: .08em; text-transform: uppercase; color: #6b7280; margin-bottom: .25rem; }
+.sidebar-subtitle { font-size: 0.75rem; text-transform: uppercase; color: #9ca3af; }
+.sidebar-link { display: block; padding: 8px 10px; border-radius: 8px; margin: 2px 0; }
+.sidebar-link:hover { background: #f3f4f6; }
+.sidebar-sublink { display: block; padding: 6px 22px; border-radius: 8px; margin: 2px 0; font-size: 0.9rem; color: #374151 !important; }
+.sidebar-sublink:hover { background: #f9fafb; }
+.sidebar-user .avatar { width: 36px; height: 36px; border-radius: 50%; background: #eef2ff; display: flex; align-items: center; justify-content: center; }
+.sidebar-footer .sidebar-link { color: #374151 !important; }
+
+/* Fixed-size images */
+.img-fixed-brand, .img-fixed-category { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+.img-fixed-product { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; }
+
+/* Cards and content spacing */
+.card-title { margin: 0; font-size: 0.95rem; }
+
+

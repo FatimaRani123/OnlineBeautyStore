@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% block content %}
+  <div class="row g-3">
+    <div class="col-12">
+      <h4>Categories</h4>
+    </div>
+    {% for category in categories %}
+      <div class="col-6 col-md-4 col-lg-3">
+        <a href="{% url 'catalog:category_products' category.slug %}" class="text-decoration-none">
+  <div class="card text-white">
+    {% if category.image %}
+      <img src="{{ category.image.url }}" class="img-fixed-category" alt="{{ category.name }}">
+    {% else %}
+      <img src="/static/img/category_placeholder.jpg" class="img-fixed-category" alt="{{ category.name }}">
+    {% endif %}
+    <div class="card-img-overlay d-flex align-items-end">
+      <h5 class="card-title bg-dark bg-opacity-75 p-2 rounded">{{ category.name }}</h5>
+    </div>
+  </div>
+</a>
+
+
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="row g-3 mt-4">
+    <div class="col-12">
+      <h4>Popular Brands</h4>
+    </div>
+    {% for brand in brands %}
+      <div class="col-6 col-md-3 col-lg-2">
+        <a href="{% url 'catalog:brand_product_list' brand.slug %}" class="text-decoration-none">
+          <div class="card">
+            {% if brand.image %}
+              <img src="{{ brand.image.url }}" class="card-img-top" alt="{{ brand.name }}">
+            {% else %}
+              <img src="/static/img/brand_placeholder.jpg" class="card-img-top" alt="{{ brand.name }}">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-title">{{ brand.name }}</h6>
+            </div>
+          </div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

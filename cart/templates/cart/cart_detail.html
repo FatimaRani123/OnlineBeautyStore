@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h4>Your cart</h4>
+{% if cart.items.all %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th><th>Qty</th><th>Price</th><th>Total</th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart.items.all %}
+        <tr>
+          <td><a href="{% url 'catalog:product_detail' item.product.slug %}">{{ item.product.title }}</a></td>
+          <td>
+            <form method="post" action="{% url 'cart:update_cart_item' item.id %}">
+              {% csrf_token %}
+              <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm" style="width:80px;">
+              <button class="btn btn-sm btn-secondary mt-1">Update</button>
+            </form>
+          </td>
+          <td>PKR {{ item.product.price }}</td>
+          <td>PKR {{ item.line_total }}</td>
+          <td><a class="btn btn-sm btn-outline-danger" href="{% url 'cart:remove_from_cart' item.id %}">Remove</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-between">
+    <strong>Grand total: PKR {{ cart.total }}</strong>
+    <a class="btn btn-primary" href="{% url 'cart:checkout' %}">Proceed to checkout</a>
+  </div>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h4>{{ category.name }} — Subcategories</h4>
+<ul class="list-group">
+  {% for sub in subcategories %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>{{ sub.name }}</span>
+      <a class="btn btn-sm btn-primary" href="{% url 'catalog:product_list' %}?subcategory={{ sub.slug }}">View products</a>
+    </li>
+  {% empty %}
+    <li class="list-group-item">No subcategories.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

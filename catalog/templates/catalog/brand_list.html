@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<h4>Brands</h4>
+<div class="row g-3">
+  {% for brand in brands %}
+    <div class="col-6 col-md-4 col-lg-3">
+      <a href="{% url 'catalog:brand_product_list' brand.slug %}" class="text-decoration-none">
+        <div class="card">
+          {% if brand.image %}
+            <img src="{{ brand.image.url }}" class="img-fixed-brand" alt="{{ brand.name }}">
+          {% endif %}
+          <div class="card-body">
+            <h6 class="card-title">{{ brand.name }}</h6>
+          </div>
+        </div>
+      </a>
+    </div>
+  {% empty %}
+    <p>No brands yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
